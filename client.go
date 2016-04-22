@@ -73,14 +73,12 @@ func (client *TwilioClient) post(values url.Values, uri string) ([]byte, error) 
 }
 
 func (client *TwilioClient) get(queryParams url.Values, uri string) ([]byte, error) {
-	var params *strings.Reader
-
 	if queryParams == nil {
 		queryParams = url.Values{}
 	}
 
-	params = strings.NewReader(queryParams.Encode())
-	req, err := http.NewRequest("GET", client.buildUri(uri), params)
+	req, err := http.NewRequest("GET", client.buildUri(uri), nil)
+	req.URL.RawQuery = queryParams.Encode()
 
 	if err != nil {
 		return nil, err

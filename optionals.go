@@ -1,5 +1,10 @@
 package twiliogo
 
+import (
+	"fmt"
+	"strconv"
+)
+
 type Optional interface {
 	GetParam() (string, string)
 }
@@ -134,4 +139,101 @@ type AreaCode string
 
 func (areaCode AreaCode) GetParam() (string, string) {
 	return "AreaCode", string(areaCode)
+}
+
+//For AvaliablePhoneNumbers
+type Contains string
+
+func (contains Contains) GetParam() (string, string) {
+	return "Contains", string(contains)
+}
+
+type SmsEnabled bool
+
+func (smsEnabled SmsEnabled) GetParam() (string, string) {
+	return "SmsEnabled", strconv.FormatBool(bool(smsEnabled))
+}
+
+type MmsEnabled bool
+
+func (mmsEnabled MmsEnabled) GetParam() (string, string) {
+	return "MmsEnabled", strconv.FormatBool(bool(mmsEnabled))
+}
+
+type VoiceEnabled bool
+
+func (voiceEnabled VoiceEnabled) GetParam() (string, string) {
+	return "VoiceEnabled", strconv.FormatBool(bool(voiceEnabled))
+}
+
+type ExcludeAllAddressRequired bool
+
+func (excludeAllAddressRequired ExcludeAllAddressRequired) GetParam() (string, string) {
+	return "ExcludeAllAddressRequired", strconv.FormatBool(bool(excludeAllAddressRequired))
+}
+
+type ExcludeLocalAddressRequired bool
+
+func (excludeLocalAddressRequired ExcludeLocalAddressRequired) GetParam() (string, string) {
+	return "ExcludeLocalAddressRequired", strconv.FormatBool(bool(excludeLocalAddressRequired))
+}
+
+type ExcludeForiegnAddressRequired bool
+
+func (excludeForiegnAddressRequired ExcludeForiegnAddressRequired) GetParam() (string, string) {
+	return "ExcludeForiegnAddressRequired", strconv.FormatBool(bool(excludeForiegnAddressRequired))
+}
+
+type Beta bool
+
+func (beta Beta) GetParam() (string, string) {
+	return "Beta", strconv.FormatBool(bool(beta))
+}
+
+type NearNumber string
+
+func (nearNumber NearNumber) GetParam() (string, string) {
+	return "NearNumber", string(nearNumber)
+}
+
+type NearLatLong struct {
+	Latitude  float64
+	Longitude float64
+}
+
+func (nearLatLong NearLatLong) GetParam() (string, string) {
+	return "NearLatLong", fmt.Sprintf("%.5f,%.5f",
+		nearLatLong.Latitude,
+		nearLatLong.Longitude,
+	)
+}
+
+type Distance uint16
+
+func (distance Distance) GetParam() (string, string) {
+	return "Distance", fmt.Sprintf("%d", distance)
+}
+
+type InPostalCode string
+
+func (inPostalCode InPostalCode) GetParam() (string, string) {
+	return "InPostalCode", string(inPostalCode)
+}
+
+type InRegion string
+
+func (inRegion InRegion) GetParam() (string, string) {
+	return "InRegion", string(inRegion)
+}
+
+type InRateCenter string
+
+func (inRateCenter InRateCenter) GetParam() (string, string) {
+	return "InRateCenter", string(inRateCenter)
+}
+
+type InLata string
+
+func (inLata InLata) GetParam() (string, string) {
+	return "InLata", string(inLata)
 }
