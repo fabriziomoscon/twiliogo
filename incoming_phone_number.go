@@ -2,7 +2,9 @@ package twiliogo
 
 import (
 	"encoding/json"
+	"fmt"
 	"net/url"
+	"strconv"
 )
 
 type Capabilites struct {
@@ -72,4 +74,76 @@ func BuyPhoneNumber(client Client, number Optional) (*IncomingPhoneNumber, error
 	err = json.Unmarshal(res, incomingPhoneNumber)
 
 	return incomingPhoneNumber, err
+}
+
+// UpdateSetPhoneNumberFields updates any non-empty fields (other than sid) in the passed struct
+//  because pretty much every field can be updated, we assume we are handed a
+//  struct with only the fields that we want to update and the sid nonempty.
+//
+//  Because we can't set the bool VoiceCallerIdLookup to false or true, we must
+//  pass it explicitly as a pointer to true or false, or else leave it nil to leave it alone
+func UpdatePhoneNumberFields(client Client, number *IncomingPhoneNumber, voiceCallerIdLookup *bool) (*IncomingPhoneNumber, error) {
+	if number == nil || len(number.Sid) == 0 {
+		return nil, fmt.Errorf("You must pass a struct with sid set")
+	}
+
+	changes := url.Values{}
+	if len(number.AccountSid) > 0 {
+		changes.Add("AccountSid", number.AccountSid)
+	}
+	if len(number.FriendlyName) > 0 {
+		changes.Add("FriendlyName", number.FriendlyName)
+	}
+	if len(number.ApiVersion) > 0 {
+		changes.Add("ApiVersion", number.ApiVersion)
+	}
+	if len(number.VoiceUrl) > 0 {
+		changes.Add("VoiceUrl", number.VoiceUrl)
+	}
+	if len(number.VoiceMethod) > 0 {
+		changes.Add("VoiceMethod", number.VoiceMethod)
+	}
+	if len(number.VoiceFallbackUrl) > 0 {
+		changes.Add("VoiceFallbackUrl", number.VoiceFallbackUrl)
+	}
+	if len(number.VoiceFallbackMethod) > 0 {
+		changes.Add("VoiceFallbackMethod", number.VoiceFallbackMethod)
+	}
+	if len(number.StatusCallback) > 0 {
+		changes.Add("StatusCallback", number.StatusCallback)
+	}
+	if len(number.StatusCallbackMethod) > 0 {
+		changes.Add("StatusCallbackMethod", number.StatusCallbackMethod)
+	}
+	if voiceCallerIdLookup != nil {
+		changes.Add("VoiceCallerIdLookup", strconv.FormatBool(*voiceCallerIdLookup))
+	}
+	if len(number.SmsUrl) > 0 {
+		changes.Add("SmsUrl", number.SmsUrl)
+	}
+	if len(number.SmsMethod) > 0 {
+		changes.Add("SmsMethod", number.SmsMethod)
+	}
+	if len(number.SmsFallbackUrl) > 0 {
+		changes.Add("SmsFallbackUrl", number.SmsFallbackUrl)
+	}
+	if len(number.SmsFallbackMethod) > 0 {
+		changes.Add("SmsFallbackMethod", number.SmsFallbackMethod)
+	}
+
+	res, err := client.post(changes, "/IncomingPhoneNumbers/"+number.Sid+".json")
+	if err != nil {
+		return nil, err
+	}
+
+	var incomingPhoneNumber *IncomingPhoneNumber
+	incomingPhoneNumber = new(IncomingPhoneNumber)
+	err = json.Unmarshal(res, incomingPhoneNumber)
+
+	return incomingPhoneNumber, err
+}
+
+func ReleasePhoneNumber(client Client, sid string) error {
+	err := client.delete("/IncomingPhoneNumbers/" + sid)
+	return err
 }
