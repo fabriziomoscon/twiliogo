@@ -21,6 +21,18 @@ func (applicationSid ApplicationSid) GetParam() (string, string) {
 	return "ApplicationSid", string(applicationSid)
 }
 
+type VoiceApplicationSid string
+
+func (voiceApplicationSid VoiceApplicationSid) GetParam() (string, string) {
+	return "VoiceApplicationSid", string(voiceApplicationSid)
+}
+
+type SmsApplicationSid string
+
+func (smsApplicationSid SmsApplicationSid) GetParam() (string, string) {
+	return "SmsApplicationSid", string(smsApplicationSid)
+}
+
 type Method string
 
 func (method Method) GetParam() (string, string) {
@@ -236,4 +248,65 @@ type InLata string
 
 func (inLata InLata) GetParam() (string, string) {
 	return "InLata", string(inLata)
+}
+
+// Application optionals
+type VoiceUrl string
+
+func (voiceUrl VoiceUrl) GetParam() (string, string) {
+	return "VoiceUrl", string(voiceUrl)
+}
+
+type VoiceUrlMethod string
+
+func (voiceUrlMethod VoiceUrlMethod) GetParam() (string, string) {
+	return "VoiceUrlMethod", string(voiceUrlMethod)
+}
+
+type VoiceFallbackUrl string
+
+func (voiceFallbackUrl VoiceFallbackUrl) GetParam() (string, string) {
+	return "VoiceFallbackUrl", string(voiceFallbackUrl)
+}
+
+type VoiceFallbackMethod string
+
+func (voiceFallbackMethod VoiceFallbackMethod) GetParam() (string, string) {
+	return "VoiceFallbackMethod", string(voiceFallbackMethod)
+}
+
+type SmsUrl string
+
+func (smsUrl SmsUrl) GetParam() (string, string) {
+	return "SmsUrl", string(smsUrl)
+}
+
+type SmsUrlMethod string
+
+func (smsUrlMethod SmsUrlMethod) GetParam() (string, string) {
+	return "SmsUrlMethod", string(smsUrlMethod)
+}
+
+type SmsFallbackUrl string
+
+func (smsFallbackUrl SmsFallbackUrl) GetParam() (string, string) {
+	return "SmsFallbackUrl", string(smsFallbackUrl)
+}
+
+type SmsFallbackMethod string
+
+func (smsFallbackMethod SmsFallbackMethod) GetParam() (string, string) {
+	return "SmsFallbackMethod", string(smsFallbackMethod)
+}
+
+type SmsStatusCallback string
+
+func (smsStatusCallback SmsStatusCallback) GetParam() (string, string) {
+	return "SmsStatusCallback", string(smsStatusCallback)
+}
+
+type MessageStatusCallback string
+
+func (messageStatusCallback MessageStatusCallback) GetParam() (string, string) {
+	return "MessageStatusCallback", string(messageStatusCallback)
 }
