@@ -310,3 +310,40 @@ type MessageStatusCallback string
 func (messageStatusCallback MessageStatusCallback) GetParam() (string, string) {
 	return "MessageStatusCallback", string(messageStatusCallback)
 }
+
+// for Address
+type CustomerName string
+
+func (customerName CustomerName) GetParam() (string, string) {
+	return "CustomerName", string(customerName)
+}
+
+type Street string
+
+func (street Street) GetParam() (string, string) {
+	return "Street", string(street)
+}
+
+type City string
+
+func (city City) GetParam() (string, string) {
+	return "City", string(city)
+}
+
+type Region string
+
+func (region Region) GetParam() (string, string) {
+	return "Region", string(region)
+}
+
+type PostalCode string
+
+func (postalcode PostalCode) GetParam() (string, string) {
+	return "PostalCode", string(postalcode)
+}
+
+type IsoCountry string
+
+func (isoCountry IsoCountry) GetParam() (string, string) {
+	return "IsoCountry", string(isoCountry)
+}

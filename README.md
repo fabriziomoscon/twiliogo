@@ -61,6 +61,9 @@ func main() {
 ```
 
 ## Implemented Resources
+- Address
+- Application
+- Available Phone number
 - Calls
 - Messages
 - IncomingPhoneNumbers (partial)
@@ -91,9 +94,7 @@ Here are a few things that the project needs in order to reach v1.0:
 1. Complete test coverage. Right now, tests cover the bare minimum of usage for each feature implemented.
 2. Complete IncomingPhoneNumber functionality.
 3. Implement the following resources:
-  - AvailablePhoneNumbers
   - OutgoingCallerIds
-  - Applications
   - ConnectApps
   - AuthorizedConnectApps
   - Conferences
@@ -105,7 +106,6 @@ Here are a few things that the project needs in order to reach v1.0:
   - SIP Domains
   - IpAccessControlLists
   - CredentialLists
-  - Usage Records
   - Usage Triggers
 
 ## License
