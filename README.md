@@ -1,16 +1,18 @@
 [![Build Status](https://travis-ci.org/carlosdp/twiliogo.png?branch=master)](https://travis-ci.org/carlosdp/twiliogo)
 # twilio-go
-The unofficial Go helper library for [Twilio](http://twilio.com).
+One of the many unofficial Go helper library for [Twilio](http://twilio.com).
+
+[list of all libraries](https://github.com/hoxfon/awesome-twilio-golang)
 
 # Installation
 
 ``` bash
-go get github.com/carlosdp/twiliogo
+go get github.com/fabriziomoscon/twiliogo
 ```
 
 # Documentation
 
-[GoDoc](http://godoc.org/github.com/carlosdp/twiliogo)
+[GoDoc](https://godoc.org/github.com/fabriziomoscon/twiliogo)
 
 # Usage
 
@@ -21,7 +23,7 @@ package main
 
 import (
   "fmt"
-  twilio "github.com/carlosdp/twiliogo"
+  twilio "github.com/fabriziomoscon/twiliogo"
 )
 
 func main() {
@@ -44,7 +46,7 @@ package main
 
 import (
   "fmt"
-  twilio "github.com/carlosdp/twiliogo"
+  twilio "github.com/fabriziomoscon/twiliogo"
 )
 
 func main() {
@@ -64,6 +66,7 @@ func main() {
 - Address
 - Application
 - Available Phone number
+- Incoming phone number
 - Calls
 - Messages
 - IncomingPhoneNumbers (partial)
@@ -84,9 +87,6 @@ test:
 	export TO_NUMBER="<TEST TO NUMBER>";\
 	go test -v
 ```
-
-## Contributing
-This is a side project meant to allow for quick adoption of the Twilio API for those programming web applications with it in Go. Feel free to submit pull requests so that we can cover all of the features the Twilio API has to offer!
 
 ## To Do
 Here are a few things that the project needs in order to reach v1.0:
@@ -110,4 +110,3 @@ Here are a few things that the project needs in order to reach v1.0:
 
 ## License
 This project is licensed under the [MIT License](http://opensource.org/licenses/MIT)
-
