@@ -28,7 +28,7 @@ type AvaliablePhoneNumber struct {
 
 func GetAvailablePhoneNumbers(client Client, isoCountryCode string, numType string, optionals ...Optional) (*[]AvaliablePhoneNumber, error) {
 	if numType != "local" && numType != "mobile" && numType != "tollfree" {
-		return nil, errors.New("Invalid number type" + numType)
+		return nil, errors.New("Invalid number type " + numType)
 	}
 	var avaliablePhoneNumbers *[]AvaliablePhoneNumber
 	avaliablePhoneNumbers = new([]AvaliablePhoneNumber)
