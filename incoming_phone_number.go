@@ -53,7 +53,7 @@ func GetIncomingPhoneNumber(client Client, sid string) (*IncomingPhoneNumber, er
 	return incomingPhoneNumber, err
 }
 
-func BuyPhoneNumber(client Client, number Optional) (*IncomingPhoneNumber, error) {
+func BuyPhoneNumber(client Client, number Optional, optionals ...Optional) (*IncomingPhoneNumber, error) {
 	var incomingPhoneNumber *IncomingPhoneNumber
 
 	if number == nil {
@@ -63,6 +63,10 @@ func BuyPhoneNumber(client Client, number Optional) (*IncomingPhoneNumber, error
 	params := url.Values{}
 	param, value := number.GetParam()
 	params.Set(param, value)
+	for _, optional := range optionals {
+		param, value := optional.GetParam()
+		params.Set(param, value)
+	}
 
 	res, err := client.post(params, "/IncomingPhoneNumbers.json")
 

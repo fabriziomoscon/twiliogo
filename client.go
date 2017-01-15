@@ -7,6 +7,7 @@ import (
 	"net/http"
 	"net/url"
 	"strings"
+	"time"
 )
 
 const ROOT = "https://api.twilio.com"
@@ -85,7 +86,9 @@ func (client *TwilioClient) get(queryParams url.Values, uri string) ([]byte, err
 	}
 
 	req.SetBasicAuth(client.AccountSid(), client.AuthToken())
-	httpClient := &http.Client{}
+	httpClient := &http.Client{
+		Timeout: time.Duration(5 * time.Second),
+	}
 
 	res, err := httpClient.Do(req)
 
