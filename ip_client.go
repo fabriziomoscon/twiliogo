@@ -1,5 +1,10 @@
 package twiliogo
 
+import (
+	"net/http"
+	"time"
+)
+
 // Constants for the IP Messaging service.
 const (
 	IP_MESSAGING_ROOT     = "https://ip-messaging.twilio.com"
@@ -17,5 +22,14 @@ var _ Client = &TwilioIPMessagingClient{}
 // NewIPMessagingClient creates a new Twilio IP Messaging client.
 func NewIPMessagingClient(accountSid, authToken string) *TwilioIPMessagingClient {
 	rootUrl := IP_MESSAGING_ROOT + "/" + IP_MESSAGING_VERSION
-	return &TwilioIPMessagingClient{TwilioClient{accountSid, authToken, rootUrl}}
+	return &TwilioIPMessagingClient{
+		TwilioClient{
+			accountSid: accountSid,
+			authToken:  authToken,
+			rootUrl:    rootUrl,
+			HttpClient: &http.Client{
+				Timeout: 10 * time.Second,
+			},
+		},
+	}
 }
