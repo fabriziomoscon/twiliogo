@@ -25,8 +25,7 @@ type IPCredentialList struct {
 
 // NewIPCredential creates a new IP Messaging Credential.
 // Kind must be apns or gcm.
-func NewIPCredential(client *TwilioIPMessagingClient, friendlyName string, kind string, sandbox bool, apnsCert string, apnsPrivateKey string,
-	gcmApiKey string) (*IPCredential, error) {
+func NewIPCredential(client *TwilioIPMessagingClient, friendlyName, kind string, sandbox bool, apnsCert, apnsPrivateKey, gcmApiKey, fcmSecretKey string) (*IPCredential, error) {
 	var credential *IPCredential
 
 	params := url.Values{}
@@ -48,6 +47,10 @@ func NewIPCredential(client *TwilioIPMessagingClient, friendlyName string, kind 
 	} else if kind == "gcm" {
 		if gcmApiKey != "" {
 			params.Set("ApiKey", gcmApiKey)
+		}
+	} else if kind == "fcm" {
+		if fcmSecretKey != "" {
+			params.Set("Secret", fcmSecretKey)
 		}
 	}
 
