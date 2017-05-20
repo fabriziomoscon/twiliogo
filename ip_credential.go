@@ -10,9 +10,43 @@ type IPCredential struct {
 	Sid          string `json:"sid"`
 	AccountSid   string `json:"account_sid"`
 	FriendlyName string `json:"friendly_name"`
-	Type         string `json:"type"` // apns or gcm
+	Type         string `json:"type"` // apn or fcm
 	Sandbox      bool   `json:"sandbox"`
 	URL          string `json:"url"`
+}
+
+func (cred *IPCredential) UnmarshalJSON(b []byte) error {
+	var decoded map[string]interface{}
+	err := json.Unmarshal(b, &decoded)
+	if err != nil {
+		return err
+	}
+
+	sid, ok := decoded["sid"].(string)
+	if ok == true {
+		cred.Sid = sid
+	}
+	accSid, ok := decoded["account_sid"].(string)
+	if ok == true {
+		cred.AccountSid = accSid
+	}
+	name, ok := decoded["friendly_name"].(string)
+	if ok == true {
+		cred.FriendlyName = name
+	}
+	t, ok := decoded["type"].(string)
+	if ok == true {
+		cred.Type = t
+	}
+	sandbox, ok := decoded["sandbox"].(string)
+	if ok == true {
+		cred.Sandbox = sandbox == "True"
+	}
+	url, ok := decoded["url"].(string)
+	if ok == true {
+		cred.URL = url
+	}
+	return nil
 }
 
 // IPCredentialList gives the results for querying the set of credentials. Returns the first page
@@ -25,15 +59,15 @@ type IPCredentialList struct {
 
 // NewIPCredential creates a new IP Messaging Credential.
 // Kind must be apns or gcm.
-func NewIPCredential(client *TwilioIPMessagingClient, friendlyName, kind string, sandbox bool, apnsCert, apnsPrivateKey, gcmApiKey, fcmSecretKey string) (*IPCredential, error) {
-	var credential *IPCredential
+func NewIPCredential(client *TwilioIPMessagingClient,
+	friendlyName, kind string, sandbox bool, apnsCert, apnsPrivateKey, gcmApiKey, fcmSecretKey string) (*IPCredential, error) {
 
 	params := url.Values{}
 	params.Set("FriendlyName", friendlyName)
 	params.Set("Type", kind)
 
 	if kind == "apn" {
-		if sandbox {
+		if sandbox == true {
 			params.Set("Sandbox", "true")
 		} else {
 			params.Set("Sandbox", "false")
@@ -55,12 +89,11 @@ func NewIPCredential(client *TwilioIPMessagingClient, friendlyName, kind string,
 	}
 
 	res, err := client.post(params, "/Credentials")
-
 	if err != nil {
-		return credential, err
+		return nil, err
 	}
 
-	credential = new(IPCredential)
+	credential := &IPCredential{}
 	err = json.Unmarshal(res, credential)
 
 	return credential, err
