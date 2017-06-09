@@ -1,7 +1,5 @@
 package twiliogo
 
-import "fmt"
-
 type Error struct {
 	Description string
 }
@@ -18,21 +16,5 @@ type TwilioError struct {
 }
 
 func (e TwilioError) Error() string {
-	var message string
-
-	message = "Twilio Error, "
-
-	if e.Status != 0 {
-		message += fmt.Sprintf("Status: %d", e.Status)
-	}
-
-	if e.Code != 0 {
-		message += fmt.Sprintf(", Code: %d", e.Code)
-	}
-
-	if e.Message != "" {
-		message += ", Message: " + e.Message
-	}
-
-	return message
+	return e.Message
 }

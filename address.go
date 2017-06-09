@@ -54,3 +54,12 @@ func NewAddress(client Client, accSid string, optionals ...Optional) (*Address, 
 
 	return addr, err
 }
+
+func RemoveAddress(client Client, accSid, addSid string) error {
+	err := client.delete(buildAddressesUri(accSid) + "/" + addSid + ".json")
+	if err != nil {
+		return err
+	}
+
+	return nil
+}
