@@ -12,18 +12,18 @@ type AvaliablePhoneNumberWrapper struct {
 }
 
 type AvaliablePhoneNumber struct {
-	FriendlyName        string      `json:"friendly_name"`
-	PhoneNumber         string      `json:"phone_number"`
-	IsoCountry          string      `json:"iso_country"`
-	Capabilities        Capabilites `json:"capabilities"`
-	AddressRequirements string      `json:"address_requirements"`
-	Beta                bool        `json:"beta"`
-	Lata                string      `json:"lata"`
-	RateCenter          string      `json:"rate_center"`
-	Latitude            string      `json:"latitude"`
-	Longitude           string      `json:"longitude"`
-	Region              string      `json:"region"`
-	PostalCode          string      `json:"postal_code"`
+	FriendlyName        string       `json:"friendly_name"`
+	PhoneNumber         string       `json:"phone_number"`
+	IsoCountry          string       `json:"iso_country"`
+	Capabilities        Capabilities `json:"capabilities"`
+	AddressRequirements string       `json:"address_requirements"`
+	Beta                bool         `json:"beta"`
+	Lata                string       `json:"lata"`
+	RateCenter          string       `json:"rate_center"`
+	Latitude            string       `json:"latitude"`
+	Longitude           string       `json:"longitude"`
+	Region              string       `json:"region"`
+	PostalCode          string       `json:"postal_code"`
 }
 
 func GetAvailablePhoneNumbers(client Client, isoCountryCode string, numType string, optionals ...Optional) (*[]AvaliablePhoneNumber, error) {

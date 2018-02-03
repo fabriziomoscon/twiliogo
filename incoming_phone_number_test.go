@@ -24,7 +24,7 @@ var testNumber = IncomingPhoneNumber{
 	SmsMethod:            "GET",
 	DateCreated:          "2013-05-11",
 	DateUpdated:          "2013-05-11",
-	Capabilities:         Capabilites{true, true, true},
+	Capabilities:         Capabilities{true, true, true, true},
 	ApiVersion:           "2008-04-01",
 	Uri:                  "/2010-04-01/Accounts/AC3TestAccount/Messages/testsid.json",
 }
